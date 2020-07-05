@@ -7,13 +7,15 @@ Code structure:
 
 To run:
 
-(1) run the following cmd to install packages
+(1) Install R and Rshiny.
+
+(2) run the following cmd to install packages
 
 ```
-install.packages(c("cowplot", "RMySQL", "rgdal", "float", "leaflet", "ggmap", "geoR", "fields", "raster", "dismo", "sp", "doParallel", "dplyr", "reshape2", "zoo" ,"gstat", "ggplot"))
+install.packages(c("cowplot", "RMySQL", "rgdal", "float", "leaflet", "ggmap", "geoR", "fields", "raster", "dismo", "sp", "doParallel", "dplyr", "reshape2", "zoo" ,"gstat", "ggplot2", "plotly", "shiny"), repos="https://cran.rstudio.com", dependencies=TRUE)
 ```
 
-(2) Download and create some resources. 
+(3) Download and create some resources. 
 
 a. Run the following code to get google map on Lake Erie for further plot and save into `./resources` folder (a google API is needed, so the generated files (e.g. `erieGoogleMap_2014_new.rds`) are provided for convenience)
 
@@ -29,7 +31,7 @@ for(year in c(2014, 2015, 2016)) {
 b. Download Lake Erie bathymetry file from https://www.ngdc.noaa.gov/mgg/greatlakes/erie.html (ARC ASCII version), and modify `config.R` to specify the file location
 
 
-(3) Create a SQL database to store the data
+(4) Create a SQL database to store the data
 
 Download the data from https://www.dropbox.com/sh/m1x90felp9bqp18/AAAkzGFITIIHG8Ld4MN7kA5Oa?dl=0 and use `LakeErieDO.sql` to create a mySQL database. The raw sensor data and sensor locations files are also provided. Modify config.R to give access to the database
 
@@ -39,10 +41,10 @@ The database contains 5 tables, they are
 * loggerInfo: List the location of loggers in each year. Columns are `loggerID`, `latitude`, `longitude`, `loggerPosition`, `available`, `bathymetry`, `year`, `site`, `notedDepth`, where bathymetry is extracted from Lake Erie bathymetry file based on latitude and longitude for 2014 and 2015. For 2016, the offshore logger depth is from operator's notes and nearshore loggers are extracted based on latitude and longtitude. 
 
 
-(4) To run the Rshiny app, in R concole, type:
+(5) To run the Rshiny app, in R concole, type:
 ```
 shiny::runApp('src')
 ```
 
-(5) To run algorithm without Rshiny app, check the logic in `main` function in `main.R`. 
+(6) To run algorithm without Rshiny app, check the logic in `main` function in `main.R`. 
 
